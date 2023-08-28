@@ -31,7 +31,6 @@ class _QuizState extends State<Quiz> {
         activeScreen = 'results-screen';
       });
     }
-    ;
   }
 
   void restartQuiz() {
