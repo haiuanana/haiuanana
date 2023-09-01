@@ -1,3 +1,4 @@
+import 'package:expensetrackerapp/widgets/chart/chart.dart';
 import 'package:expensetrackerapp/widgets/expenses_list/expenses_list.dart';
 import 'package:expensetrackerapp/widgets/new_expense.dart';
 import 'package:flutter/material.dart';
@@ -62,7 +63,7 @@ class _ExpensesState extends State<Expenses> {
 
   @override
   Widget build(BuildContext context) {
-    Widget mainContent = Center(
+    Widget mainContent = const Center(
       child: Text("No expenses found. Start adding some"),
     );
 
@@ -85,39 +86,12 @@ class _ExpensesState extends State<Expenses> {
       ),
       body: Column(
         children: [
-          const Text('The chart'),
+          Chart(expenses: _registerExpenses),
           Expanded(
             child: mainContent,
           )
         ],
       ),
     );
-  }
-}
-
-class ExpenseBucket {
-  const ExpenseBucket({
-    required this.category,
-    required this.expenses,
-  });
-
-  ExpenseBucket.forCategory(
-    List<Expense> allExpenses,
-    this.category,
-  ) : expenses = allExpenses
-            .where((expense) => expense.category == category)
-            .toList();
-
-  final Category category;
-  final List<Expense> expenses;
-
-  double get totalExpenses {
-    double sum = 0;
-
-    for (final expense in expenses) {
-      sum = sum + expense.amount;
-    }
-
-    return sum;
   }
 }
